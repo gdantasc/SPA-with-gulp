@@ -1,11 +1,19 @@
 const gulp = require("gulp");
+const webserver = require("gulp-webserver");
+const watch = require("gulp-watch");
 
-function monitorFiles(cb) {
-  return cb();
+function servidor() {
+  return gulp.src("build").pipe(
+    webserver({
+      port: 8080,
+      open: true,
+      livereload: true,
+    })
+  );
 }
 
-function servidor(cb) {
-  return cb();
+function monitorFiles() {
+  return watch("src/**/*.html", () => gulp.series("appHTML")());
 }
 
 module.exports = {
